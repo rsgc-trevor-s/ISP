@@ -1,116 +1,158 @@
+//Sean Trevor
+//Final Revision 
+
+float diameter = 80; //sets variable for the radius of the circle
+float xposition; //variable for x position 
+float yposition; //variable for y position
+float xspeed=2;// set variable for how fast circle moves along x axis 
+float yspeed = 2;//set variable for how fast circle moves along y axis
+float xdirection = -1;//set variable for the direction the circle moves along the x axis 
+float ydirection = -1;//set variable for the direction the circle moves along the y axis 
 
 
-float radius = 60; //sets variable for the radius of the circle
-float xposition; //set variable for x position 
-float yposition; //set variable for y position
-float xspeed=4.5;// set variable for how fast circle moves along x axis 
-float yspeed = 4.5;//set variable for how fast circle moves along y axis
-int xdirection = 1;//set variable for the direction the circle moves along the x axis 
-int ydirection = 1;//set variable for the direction the circle moves along the y axis 
-
-
-float radius2 = 60; 
+float diameter2 = 80; 
 float xposition2; 
 float yposition2; 
-float xspeed2= 5;
-float yspeed2 = 5;
-int xdirection2 = 1;
-int ydirection2 = 1; 
+float xspeed2= 3;
+float yspeed2 = 3;
+float xdirection2 = 1;
+float ydirection2 = 1; 
 
-float radius3 = 60; 
+
+
+float diameter3 = 80; 
 float xposition3; 
 float yposition3; 
-float xspeed3= 6;
-float yspeed3 = 6;
+float xspeed3= 2;
+float yspeed3 = 2;
 int xdirection3 = 1;
 int ydirection3 = 1; 
 
-float radius4 = 60; 
-float xposition4; 
-float yposition4; 
-float xspeed4=4.5;
-float yspeed4 = 4.5;
-int xdirection4 = 1;
-int ydirection4= 1; 
+float xpositionmid= 400;
+float ypositionmid = 300;
+float diametermid = 100; 
+
 
 void setup() { 
-  size (1300, 800); //size of canvas
+  size (1200, 720); //size of canvas
   background(0); //sets background colour to black
   noStroke(); 
   frameRate(60); 
-  xposition = width/4; //determines starting x vaue of circle
-  yposition = height/4;//determines starting y vaue of circle
-  
+  xposition = width/2; //determines starting x vaue of circle
+  yposition = height/2;//determines starting y vaue of circle
+
   xposition3 = width/20;
   yposition3 = height/6;
 
-  xposition2 = width/2;
-  yposition2 = height/2;
+  xposition2 = width/6;
+  yposition2 = height/6;
 
-  xposition4 = width/6;
-  yposition4 = height/2;
+  // xposition4 = width/6;
+  // yposition4 = height/2;
 }
 
 
 void draw() {
-  xposition=xposition+2;
-  xposition3=xposition3+2;
 
 
 
-  //background(0);
-  xposition = xposition+ (xspeed * xdirection);
-  yposition = yposition +(yspeed * ydirection); 
+  // Filter only every other frame (when frameCount is evenly divisible by 2, i.e.: when the remainder is 0)
+  //if (frameCount % 2== 0) {
+   filter(BLUR, 1);
 
-  if (xposition >width-radius||xposition<0+radius) {
-    xdirection *= -1;
-  }
-  if (yposition >height-radius|| yposition<0+radius) {
-    ydirection *= -1;
-  }
+
+
+  float a = yposition2-yposition; //sets a(ylength) variable for ellipse
+  float b= xposition2-xposition; //set b(x length) variable for ellipse 
+  float distance= sqrt(a*a+b*b); //finds distance between ellipses 
+
+  float a2 = yposition2-yposition3; //sets a(ylength) variable for ellipse
+  float b2= xposition2-xposition3; //set b(x length) variable for ellipse 
+  float distance2= sqrt(a2*a2+b2*b2); //finds distance between ellipses
+
+  float a3 = yposition-yposition2; //sets a(ylength) variable for ellipse
+  float b3= xposition-xposition2; //set b(x length) variable for ellipse 
+  float distance3= sqrt(a3*a3+b3*b3); //finds distance between ellipses 
+  
+  float amid = ypositionmid-yposition; //sets a(ylength) variable for ellipse
+  float bmid= xpositionmid-xposition; //set b(x length) variable for ellipse 
+  float distancemid= sqrt(amid*amid+bmid*bmid); //finds distance between ellipses 
+
+
 
 
   xposition2 = xposition2+ (xspeed2 * xdirection2);
-  yposition2 = yposition2 +(yspeed2 * ydirection2); 
-
-  if (xposition2 >width-radius2||xposition2<0+radius2) {
-    xdirection2 *= -1;
-  }
-  if (yposition2 >height-radius2|| yposition2<0+radius2) {
-    ydirection2 *= -1;
-  }
-
-
+  yposition2 = yposition2 +(yspeed2 * ydirection2);
 
   xposition3 = xposition3+ (xspeed3 * xdirection3);
-  yposition3 = yposition3+(yspeed3 * ydirection3); 
+  yposition3 = yposition3 +(yspeed3 * ydirection3);
 
-  if (xposition3 >width-radius3||xposition3<0+radius3) {
-    xdirection3 *= -1;
+  xposition = xposition+ (xspeed * xdirection); //determines the x position
+  yposition = yposition +(yspeed * ydirection); //determines the x position
+
+
+
+    if (xposition >width-30||xposition<0+30) { //states if the xposition is greater then the width 
+    xdirection *= -1;//decrease x value by one
   }
-  if (yposition3 >height-radius3|| yposition3<0+radius3) {
-    ydirection3 *= -1;
-  }
-
-
-  xposition4 = xposition4+ (xspeed4 * xdirection4);
-  yposition4 = yposition4 +(yspeed4 * ydirection4); 
-
-  if (xposition4 >width-radius4||xposition4<0+radius4) {
-    xdirection4 *= -1;
-  }
-  if (yposition4 >height-radius4|| yposition4<0+radius4) {
-    ydirection4 *= -1;
+  if (yposition >height-30|| yposition<0+30) {//states if the yposition is greater then the height
+    ydirection *= -1;//decrease y value by one
   }
 
+  if (xposition2 >width-30||xposition2<0+30) {
+    xdirection2 *= -1;
+    ;
+  }
+  if (yposition2 >height-30|| yposition2<0+30) {
+    ydirection2 *= -1;
+    ;
+  }
+
+  if (xposition3 >width-30||xposition3<0+30) { //states if the xposition is greater then the width 
+    xdirection3 *= -1;//decrease x value by one
+  }
+  if (yposition3 >height-30|| yposition3<0+30) {//states if the yposition is greater then the height
+    ydirection3 *= -1;//decrease y value by one
+  }
+
+  if (distance <= (diameter/2 + diameter2 /2)) { //hit dectection for the ellipses
+    xdirection = ydirection * -1;
+    xdirection2 =  ydirection2 * -1;
+  }
+  if (distance3 <= (diameter3/2 + diameter /2)) {
+    xdirection3 = ydirection3 * -1;
+    xdirection =  ydirection * -1;
+  }
+
+  if (distance2 <= (diameter2/2 + diameter3 /2)) {
+    xdirection2 = ydirection2 * random(-1, 1);
+    xdirection3 =  ydirection3 * -1;
+  }
+
+  if (distance3 <= (diameter/2 + diameter /2)) {
+    xdirection = ydirection * -1;
+    xdirection3 =  ydirection3 * -1;
+  }
+ if (distance <= (diameter/2 + diameter3 /2)) {
+    xdirection = ydirection * -1;
+   
+  }
 
 
-  fill(255, 10, 0);
-  ellipse(xposition, yposition, radius, radius);
-  fill(0, 255, 20);
-  ellipse (xposition2, yposition2, radius2, radius2);
-  fill(100, 0, 255);
-  ellipse (xposition3, yposition3, radius3, radius3);
-  fill(255, 255, 8);
-  ellipse(xposition4, yposition4, radius4, radius4);
+
+
+  fill(0, 255, yposition, 25);
+  ellipse(xposition, yposition, diameter, diameter);
+  fill(xposition2, 50, yposition2, 25);
+  ellipse (xposition2, yposition2, diameter2, diameter2);
+  fill(250, 180, 0, 25);
+  ellipse (xposition3, yposition3, diameter3, diameter3);
+ 
 }
+
+void keyPressed(){
+  exit();
+}
+void mouseMoved(){
+  exit(); 
+} 
